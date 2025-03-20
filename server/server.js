@@ -1,13 +1,9 @@
 import express from 'express';
-import { createRequire } from 'node:module';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import jsonServer from 'json-server';
 
-const require = createRequire(import.meta.url);
 const __dirname = dirname(fileURLToPath(import.meta.url));
-
-// Import json-server
-const jsonServer = require('json-server');
 
 const app = express();
 const PORT = process.env.PORT || 8000;
@@ -29,6 +25,7 @@ app.get('*', (req, res) => {
     res.sendFile(join(__dirname, 'dist', 'index.html'));
 });
 
+// Listen on all network interfaces
 app.listen(PORT, '0.0.0.0', () => {
     console.log(`Server listening on port ${PORT}`);
 });
